@@ -16,7 +16,9 @@
 /* ============================================================
    RESET & BASE
    ============================================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -24,7 +26,7 @@
 
 body {
   background: #fff;
-  font-family: 'TypeFezStd', sans-serif;
+  font-family: "TypeFezStd", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -43,16 +45,16 @@ button {
    DESIGN TOKENS
    ============================================================ */
 :root {
-  --color-blue:         #2C4A77;
-  --color-pink:         #DA649F;
-  --color-pink-light:   #F6C0E4;
-  --color-blue-light:   #9CC3F5;
-  --color-dark:         #252525;
-  --color-mid:          #6C6C71;
-  --color-gray:         #909098;
-  --color-border:       #E6E6E8;
-  --color-border-light: #F1F1F1;
-  --color-white:        #FFFFFF;
+  --color-blue: #2c4a77;
+  --color-pink: #da649f;
+  --color-pink-light: #f6c0e4;
+  --color-blue-light: #9cc3f5;
+  --color-dark: #252525;
+  --color-mid: #6c6c71;
+  --color-gray: #909098;
+  --color-border: #e6e6e8;
+  --color-border-light: #f1f1f1;
+  --color-white: #ffffff;
 
   --gradient-pink-blue: linear-gradient(
     168.56deg,
@@ -86,7 +88,7 @@ button {
   position: absolute;
   /* Centre point of the pink system: left = 50% - 1079px, top = 50% - 1284px */
   left: calc(50% - 1079px);
-  top:  calc(50% - 1284px);
+  top: calc(50% - 1284px);
   width: 1600px;
   height: 1600px;
   transform: translate(-50%, -50%);
@@ -125,13 +127,34 @@ button {
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.bg-circle--1600 { width: 1600px; height: 1600px; }
-.bg-circle--1440 { width: 1440px; height: 1440px; }
-.bg-circle--1280 { width: 1280px; height: 1280px; }
-.bg-circle--1120 { width: 1120px; height: 1120px; }
-.bg-circle--960  { width: 960px;  height: 960px;  }
-.bg-circle--800  { width: 800px;  height: 800px;  }
-.bg-circle--640  { width: 640px;  height: 640px;  }
+.bg-circle--1600 {
+  width: 1600px;
+  height: 1600px;
+}
+.bg-circle--1440 {
+  width: 1440px;
+  height: 1440px;
+}
+.bg-circle--1280 {
+  width: 1280px;
+  height: 1280px;
+}
+.bg-circle--1120 {
+  width: 1120px;
+  height: 1120px;
+}
+.bg-circle--960 {
+  width: 960px;
+  height: 960px;
+}
+.bg-circle--800 {
+  width: 800px;
+  height: 800px;
+}
+.bg-circle--640 {
+  width: 640px;
+  height: 640px;
+}
 
 /* ============================================================
    PATTERN DECORATION
@@ -205,7 +228,7 @@ button {
 
 /* Pill / badge labels */
 .pill-label {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
@@ -300,7 +323,7 @@ button {
   width: 1440px;
   height: 792px;
   overflow: clip;
-  z-index: 2;
+  padding: 240px 80px 88px 80px;
 }
 
 .hero-content {
@@ -310,7 +333,7 @@ button {
   width: 1280px;
   display: flex;
   align-items: center;
-  gap: 56px;
+  gap: 120px;
 }
 
 /* ── Hero left column ── */
@@ -319,13 +342,13 @@ button {
   flex-direction: column;
   gap: 56px;
   align-items: flex-start;
-  width: 723px;
   flex-shrink: 0;
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
   width: 668px;
 }
@@ -614,8 +637,8 @@ button {
   transform: translateX(-50%);
   padding: 12px 20px;
   border-radius: 100px;
-  background: linear-gradient(174.33deg, #59595D 12.73%, #333334 71.88%);
-  border-bottom: 1px solid #59595D;
+  background: linear-gradient(174.33deg, #59595d 12.73%, #333334 71.88%);
+  border-bottom: 1px solid #59595d;
   box-shadow: 0px 8px 20px 0px rgba(88, 88, 88, 0.1);
   overflow: hidden;
   white-space: nowrap;
@@ -729,7 +752,7 @@ button {
   align-items: center;
   gap: 8px;
   padding: 4px;
-  background: #F4F4F4;
+  background: #f4f4f4;
   border-radius: 54px;
   width: 88px;
   height: 44px;
