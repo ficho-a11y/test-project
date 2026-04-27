@@ -1,0 +1,824 @@
+/* ============================================================
+   TRANSFEZ LANDING PAGE — style.css
+   Implements node 37:2623 (top-section) from Figma design.
+
+   Font: TypeFezStd (must be installed or declared via @font-face).
+   If using separate weight files, add @font-face rules like:
+
+   @font-face {
+     font-family: 'TypeFezStd';
+     src: url('../fonts/TypeFezStd-Regular.woff2') format('woff2');
+     font-weight: 400;
+   }
+   (repeat for 300, 600, 700)
+   ============================================================ */
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fff;
+  font-family: 'TypeFezStd', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --color-blue:         #2C4A77;
+  --color-pink:         #DA649F;
+  --color-pink-light:   #F6C0E4;
+  --color-blue-light:   #9CC3F5;
+  --color-dark:         #252525;
+  --color-mid:          #6C6C71;
+  --color-gray:         #909098;
+  --color-border:       #E6E6E8;
+  --color-border-light: #F1F1F1;
+  --color-white:        #FFFFFF;
+
+  --gradient-pink-blue: linear-gradient(
+    168.56deg,
+    rgba(246, 192, 228, 0.2) 4.69%,
+    rgba(255, 255, 255, 0.2) 49.17%,
+    rgba(156, 195, 245, 0.2) 103.03%
+  );
+  --gradient-pink-blue-2: linear-gradient(
+    168.42deg,
+    rgba(246, 192, 228, 0.2) 4.69%,
+    rgba(156, 195, 245, 0.2) 103.03%
+  );
+}
+
+/* ============================================================
+   TOP-SECTION WRAPPER
+   ============================================================ */
+.top-section {
+  position: relative;
+  width: 1440px;
+  height: 1680px;
+  background: #ffffff;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   BACKGROUND CIRCLES — PINK (left side, rotated 90°)
+   ============================================================ */
+.bg-pink-container {
+  position: absolute;
+  /* Centre point of the pink system: left = 50% - 1079px, top = 50% - 1284px */
+  left: calc(50% - 1079px);
+  top:  calc(50% - 1284px);
+  width: 1600px;
+  height: 1600px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.bg-pink-rotate {
+  transform: rotate(90deg);
+  width: 1600px;
+  height: 1600px;
+}
+
+/* ============================================================
+   BACKGROUND CIRCLES — BLUE (right side)
+   ============================================================ */
+.bg-blue-container {
+  position: absolute;
+  left: 1080px;
+  top: 3px;
+  width: 1600px;
+  height: 1600px;
+  pointer-events: none;
+}
+
+/* Shared: concentric circles all centred in their parent */
+.bg-circles-center {
+  position: relative;
+  width: 1600px;
+  height: 1600px;
+}
+
+.bg-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.bg-circle--1600 { width: 1600px; height: 1600px; }
+.bg-circle--1440 { width: 1440px; height: 1440px; }
+.bg-circle--1280 { width: 1280px; height: 1280px; }
+.bg-circle--1120 { width: 1120px; height: 1120px; }
+.bg-circle--960  { width: 960px;  height: 960px;  }
+.bg-circle--800  { width: 800px;  height: 800px;  }
+.bg-circle--640  { width: 640px;  height: 640px;  }
+
+/* ============================================================
+   PATTERN DECORATION
+   ============================================================ */
+.pattern-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pattern-1 {
+  position: absolute;
+  left: 280px;
+  top: -1318px;
+  width: 2294.999px;
+  height: 3957px;
+}
+.pattern-1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.pattern-2 {
+  position: absolute;
+  left: -1585px;
+  top: -551px;
+  width: 2295px;
+  height: 3443px;
+  transform: rotate(180deg);
+}
+.pattern-2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/* ============================================================
+   COMP ILLUSTRATION (decorative phone + artwork)
+   ============================================================ */
+.comp-wrapper {
+  position: absolute;
+  /* Center at (50% - 114.5px), then translateX(-50%) centres by its own width */
+  left: calc(50% - 114.5px);
+  top: 34.95px;
+  width: 1469.7px;
+  height: 1110.169px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.comp-rotated {
+  transform: rotate(-15deg);
+}
+
+.comp-img {
+  width: 1307.454px;
+  height: 799px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ============================================================
+   SHARED UTILITIES
+   ============================================================ */
+
+/* Pill / badge labels */
+.pill-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.pill-label--gradient {
+  background: var(--gradient-pink-blue-2);
+}
+
+.pill-label--bordered {
+  background: var(--gradient-pink-blue);
+  border: 1px solid var(--color-pink-light);
+}
+
+.pill-label--center {
+  align-self: center;
+}
+
+.pill-label span {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--color-mid);
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+/* Small icon wrapper (24×24 and 20×20) */
+.icon-sm {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+.icon-sm img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* CTA Button */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: var(--color-pink);
+  color: var(--color-white);
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Flag circle (round flag thumbnail) */
+.flag-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.flag-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.flag-circle--sm {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================================
+   HERO SECTION  (absolute, top: 0, h: 792px)
+   ============================================================ */
+.hero-section {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1440px;
+  height: 792px;
+  overflow: clip;
+  z-index: 2;
+}
+
+.hero-content {
+  position: absolute;
+  left: 80px;
+  top: 240px;
+  width: 1280px;
+  display: flex;
+  align-items: center;
+  gap: 56px;
+}
+
+/* ── Hero left column ── */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  align-items: flex-start;
+  width: 723px;
+  flex-shrink: 0;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 668px;
+}
+
+.hero-headline {
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: 700;
+  color: var(--color-blue);
+}
+
+.text-pink {
+  color: var(--color-pink);
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 400;
+  color: var(--color-gray);
+  width: 612px;
+}
+
+.voucher-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  position: relative;
+}
+.voucher-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Calculator card ── */
+.calculator-card {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid var(--color-pink-light);
+  border-radius: 20px;
+  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.08);
+}
+
+.converter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Vertical dashed line between the two input boxes */
+.converter-divider {
+  position: absolute;
+  left: 28px;
+  top: 96.5px;
+  width: 1px;
+  height: 93px;
+  z-index: 1;
+}
+.converter-divider img {
+  width: 100%;
+  height: 100%;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.input-label {
+  font-size: 14px;
+  line-height: normal;
+  font-weight: 400;
+  color: var(--color-dark);
+  letter-spacing: 0.2px;
+  padding: 0 4px;
+}
+
+.input-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.currency-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.currency-code {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  color: var(--color-dark);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.amount-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.amount-value {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  color: var(--color-dark);
+  letter-spacing: 0.2px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Fee rows */
+.fee-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 12px 4px 16px;
+}
+
+.fee-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fee-row__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.fee-row__icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.fee-row__left span,
+.fee-row__value {
+  font-size: 14px;
+  line-height: normal;
+  font-weight: 400;
+  color: var(--color-mid);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.fee-row__value {
+  text-align: right;
+}
+
+/* ============================================================
+   FEATURE SECTION  (absolute, top: 880px, h: 800px)
+   ============================================================ */
+.feature-section {
+  position: absolute;
+  left: 0;
+  top: 880px;
+  width: 1440px;
+  height: 800px;
+  overflow: clip;
+  z-index: 2;
+}
+
+.feature-deco {
+  position: absolute;
+  left: 74.52%;
+  right: -12.69%;
+  top: 242.89px;
+  height: 598.283px;
+  pointer-events: none;
+}
+.feature-deco img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.feature-content {
+  position: absolute;
+  left: 80px;
+  top: 80px;
+  width: 1280px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+/* ── Feature left column ── */
+.feature-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* White background wrapper so label sits on white, not the gradient bg */
+.feature-label-wrap {
+  background: white;
+  display: inline-flex;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.feature-headline {
+  font-size: 44px;
+  line-height: 56px;
+  font-weight: 600;
+  color: var(--color-blue);
+}
+
+.feature-desc {
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 400;
+  color: var(--color-gray);
+}
+
+.feature-desc strong {
+  font-weight: 700;
+  color: var(--color-gray);
+}
+
+/* ── Feature right column (phone mockup) ── */
+.feature-right {
+  position: relative;
+  width: 520px;
+  height: 640px;
+  flex-shrink: 0;
+}
+
+.phone-img {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 312px;
+  height: 640px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ============================================================
+   ANNOUNCEMENT BANNER  (absolute, centered, top: 128px)
+   ============================================================ */
+.banner {
+  position: absolute;
+  left: 50%;
+  top: 128px;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 100px;
+  background: linear-gradient(174.33deg, #59595D 12.73%, #333334 71.88%);
+  border-bottom: 1px solid #59595D;
+  box-shadow: 0px 8px 20px 0px rgba(88, 88, 88, 0.1);
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.banner__inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.banner__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.banner__right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.banner__text {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--color-white);
+}
+
+.banner__try-now {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--color-pink-light);
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+/* ============================================================
+   NAVBAR  (absolute, left: 80px, top: 40px, w: 1280px)
+   ============================================================ */
+.navbar {
+  position: absolute;
+  left: 80px;
+  top: 40px;
+  width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  box-shadow: 0px 4px 4px 0px rgba(88, 88, 88, 0.06);
+  z-index: 4;
+}
+
+/* ── Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo__inner {
+  position: relative;
+  width: 139.5px;
+  height: 24px;
+}
+
+/* Lightning-bolt spark: top-right of the logo box */
+.logo__spark {
+  position: absolute;
+  top: 0;
+  left: 86.4%;
+  right: 0;
+  bottom: 46.92%;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: fill;
+}
+
+/* "transfez" wordmark: fills most of the logo box */
+.logo__wordmark {
+  position: absolute;
+  top: 9.22%;
+  left: 0;
+  right: 8.45%;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: fill;
+}
+
+/* ── Nav controls (right side) ── */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Language toggle pill */
+.lang-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  background: #F4F4F4;
+  border-radius: 54px;
+  width: 88px;
+  height: 44px;
+  cursor: pointer;
+}
+
+/* Floating circle that highlights the active language */
+.lang-toggle__circle {
+  position: absolute;
+  /* EN is active: left-aligns with the EN button (after ID + gap) */
+  left: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  z-index: 1;
+}
+.lang-toggle__circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lang-toggle__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 45px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.lang-toggle__option--inactive {
+  font-weight: 400;
+  color: var(--color-gray);
+}
+
+.lang-toggle__option--active {
+  font-weight: 700;
+  color: var(--color-pink);
+}
+
+/* "Kirim uang dari" send-from control */
+.send-from {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 16px;
+  background: var(--color-blue);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.send-from__label {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+.send-from__pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--color-white);
+  border-radius: 100px;
+}
+
+.send-from__country {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--color-dark);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.chevron-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
