@@ -323,6 +323,7 @@ button {
   width: 1440px;
   height: 792px;
   overflow: clip;
+  z-index: 2;
   padding: 240px 80px 88px 80px;
 }
 
